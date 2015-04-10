@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace InClassSolutions
 {
     class Program
     {
@@ -23,79 +23,51 @@ namespace ConsoleApplication1
             int count = studentList.Count;
             GroupListMaker(studentList, count);
         }
-        /// <summary>
-        /// Creates a method for adding random names to lists within a list
-        /// </summary>
-        /// <param name="names"></param>
-        public static void GroupListMaker(List<string> students, int numberOfStudents)
+
+
+        public static void GroupListMaker(List<string> students, int num)
         {
-            //User selects size of groups
-            Console.WriteLine("Please enter a groups size: ");
-            int groupSize = int.Parse(Console.ReadLine());
 
-            //Creates rng
             Random rng = new Random();
-            //First String for storing strings
-            List<List<string>> studentGroupList = new List<List<string>>();
-            //temporarily stores names in list for later storage in studentGroupList
-            List<string> currentGroupList = new List<string>();
-
-            int selector = numberOfStudents - 1;
             int groupNumber = 1;
 
-            //while there are students left to sort
+            List<List<string>> studentGroupList = new List<List<string>>();
+            List<string> currentGroupList = new List<string>();
+
+            Console.WriteLine("Please enter the desired group size: ");
+            int groupSize = int.Parse(Console.ReadLine());
+            
+
             while (students.Count > 0)
             {
-                //Assign random student to variable
-                string thisStudent = students[rng.Next(selector)];
-                //Add variable to current list
+                string thisStudent = students[rng.Next(students.Count)];
                 currentGroupList.Add(thisStudent);
-                //Remove selected student from list
                 students.Remove(thisStudent);
-                //Reduce randomization selector
-                selector--;
 
-                //If the size of the group and list size are equal, or there are no students left to sort
                 if (groupSize == currentGroupList.Count || students.Count == 0)
                 {
-                    //Extra students not already assigned to groups
                     if (groupSize > currentGroupList.Count)
                     {
-                        Console.WriteLine("Pick a group");
-
-                        goto Ending;
-                        //separate elements from list and distribute them amongs all current lists in student list
+                        //Any leftovers can be sorted into different groups
                     }
-
-                    //this all executes before storage occurs
-                    Console.WriteLine("Group {0}: ", groupNumber);
-
-                Ending:
-                    for (int i = 0; i < currentGroupList.Count; i++)
-                    {
-                        Console.WriteLine("{0}", currentGroupList[i]);
-                    }
-
-                    groupNumber++;
-
-                    //TODO fix this here, not storing multiple lists within list properly :C :C :C :C :C :C
+                    
                     studentGroupList.Add(currentGroupList);
                     currentGroupList = new List<string>();
-                    //foreach (var group in studentGroupList)
-                    //{
-                    //    foreach (var student in group)
-                    //    {
-                    //        while (groupNumber < groupSize)
-                    //        {
-                    //            Console.WriteLine("Group {0}: ", groupNumber);
-
-                    //            Console.WriteLine("{0}", student);
-                    //            groupNumber++;
-                    //        }
-                    //    }
-                    //}
-
                 }
+            }
+
+            // this iterates over all lists in studentGroupList,
+            // then over all students in the current list and prints them;
+            // it separates the printed groups by empty lines
+            foreach (List<string> group in studentGroupList)
+            {
+                Console.WriteLine("Group {0}: ", groupNumber);
+                foreach (string student in group)
+                {
+                    Console.WriteLine("{0}", student);
+                }
+                Console.WriteLine();
+                groupNumber++;
             }
         }
     }
