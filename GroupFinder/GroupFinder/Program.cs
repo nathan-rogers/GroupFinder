@@ -48,6 +48,11 @@ namespace InClassSolutions
                 {
                     if (groupSize > currentGroupList.Count)
                     {
+                        for (int i = 0; i < currentGroupList.Count; i++)
+                        {
+                            //TODO Fix This
+                            studentGroupList.Insert(i, currentGroupList);
+                        }
                         //Any leftovers can be sorted into different groups
                     }
                     
