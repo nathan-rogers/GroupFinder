@@ -96,6 +96,10 @@ namespace InClassSolutions
                 }
             }
 
+
+            ///Loops through list to print
+            ///Console.Write(string.Join("\n", currentGroupList));
+
             // this iterates over all lists in studentGroupList,
             // then over all students in the current list and prints them;
             // it separates the printed groups by empty lines
