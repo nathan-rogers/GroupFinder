@@ -21,7 +21,11 @@ namespace InClassSolutions
             //Set Student List
             List<string> studentList = new List<string> { "Nathan", "Mahmoud", "Lamond", "Mac", "Colton", "Ryan", "Umar", "Keif", "Aaron", "Matt", "Mitch", "David", "Kris" };
             int count = studentList.Count;
-            GroupListMaker(studentList);
+
+            Console.WriteLine("Please enter the desired group size: ");
+            int groupSize = int.Parse(Console.ReadLine());
+
+            GroupListMaker(studentList, groupSize);
         }
 
 
@@ -29,7 +33,7 @@ namespace InClassSolutions
         /// Takes an external list and generates random groups of desired size
         /// </summary>
         /// <param name="students"></param>
-        public static void GroupListMaker(List<string> students)
+        public static void GroupListMaker(List<string> students, int groupSize)
         {
 
             Random rng = new Random();
@@ -39,8 +43,6 @@ namespace InClassSolutions
             List<List<string>> studentGroupList = new List<List<string>>();
             List<string> currentGroupList = new List<string>();
 
-            Console.WriteLine("Please enter the desired group size: ");
-            int groupSize = int.Parse(Console.ReadLine());
             // this is an int
             // do you minimum number check here
 
